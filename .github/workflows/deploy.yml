@@ -10,8 +10,8 @@ on:
 env:
   AWS_REGION: ap-northeast-2
   S3_BUCKET_NAME: my-github-actions-s3-server
-  CODE_DEPLOY_APPLICATION_NAME: My-codedeploy-app
-  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: my-codedeployment-group
+  CODE_DEPLOY_APPLICATION_NAME: My-side-CodeDeploy-app
+  CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: My-side-CodeDeploy-group
 #   RESOURCE_PATH: ./src/main/resources/application.properties
   spring.datasource.url: ${{ secrets.RDS_MYSQL_URL }}
   spring.datasource.username: ${{ secrets.RDS_MYSQL_USERNAME }}
