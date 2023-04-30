@@ -6,7 +6,6 @@ import com.sparta.sogonsogon.jwt.JwtUtil;
 import com.sparta.sogonsogon.security.CustomAccessDeniedHandler;
 import com.sparta.sogonsogon.security.CustomAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
