@@ -173,3 +173,6 @@ gradle-app.setting
 data/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,gradle
+
+#yml
+application.yml
