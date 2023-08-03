@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="TenMainDB" uuid="fd34abd9-6841-478d-8a9e-f181ddc8f422">
+    <data-source source="LOCAL" name="tripDB@database-1.cnr5qqzyiypu.ap-northeast-2.rds.amazonaws.com" uuid="23e29c61-c37f-47e5-a38b-1941922c4010">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
