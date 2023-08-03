@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.0.6'
+	id 'org.springframework.boot' version '2.7.9'
 	id 'io.spring.dependency-management' version '1.1.0'
 }
 
@@ -24,7 +24,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+//	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 //	runtimeOnly 'com.mysql:mysql-connector-j'
@@ -52,12 +52,11 @@ dependencies {
 	implementation 'org.springframework.security:spring-security-messaging'
 
 	//Oauth2
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+//	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	//이 의존성이 왜 필요한 건가 .. ㅡㅡ 의심중
-	implementation 'io.mzlnk.oauth2.exchange:oauth2-exchange-spring-boot-autoconfigure:0.1.1'
-	implementation 'org.springframework.security:spring-security-oauth2-jose:6.0.2'
+//	implementation 'io.mzlnk.oauth2.exchange:oauth2-exchange-spring-boot-autoconfigure:0.1.1'
+//	implementation 'org.springframework.security:spring-security-oauth2-jose:6.0.2'
 	implementation 'org.apache.oltu.jose:org.apache.oltu.jose.jws:1.0.1'
-	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 
 	//json parsing
 	implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
