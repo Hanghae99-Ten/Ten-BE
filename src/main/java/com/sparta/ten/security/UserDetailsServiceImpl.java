@@ -1,7 +1,7 @@
 package com.sparta.ten.security;
 
-import com.sparta.sogonsogon.member.entity.Member;
-import com.sparta.sogonsogon.member.repository.MemberRepository;
+import com.sparta.ten.account.domain.Account;
+import com.sparta.ten.account.domain.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,15 +14,15 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final MemberRepository memberRepository;
+    private final AccountRepository accountRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String membername) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String accountName) throws UsernameNotFoundException {
 
-        System.out.println("UserDetailsServiceImpl.loadUserByUsername : " + membername);
+        System.out.println("UserDetailsServiceImpl.loadUserByUsername : " + accountName);
 
-        Member user = memberRepository.findByMembername(membername)
+        Account user = accountRepository.findByAccountName(accountName)
                 .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
-        return new UserDetailsImpl(user, user.getMembername());
+        return new UserDetailsImpl(user, user.getAccountName());
     }
 }

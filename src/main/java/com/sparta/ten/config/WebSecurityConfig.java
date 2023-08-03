@@ -1,10 +1,7 @@
 package com.sparta.ten.config;
 
-import com.sparta.sogonsogon.jwt.JwtAuthFilter;
-import com.sparta.sogonsogon.jwt.JwtUtil;
-//import com.sparta.sogonsogon.member.oauth.service.CustomOAuth2MemberService;
-import com.sparta.sogonsogon.security.CustomAccessDeniedHandler;
-import com.sparta.sogonsogon.security.CustomAuthenticationEntryPoint;
+import com.sparta.ten.jwt.JwtAuthFilter;
+import com.sparta.ten.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -37,8 +34,8 @@ import java.util.Arrays;
 public class WebSecurityConfig implements WebMvcConfigurer {
 
     private final JwtUtil jwtUtil;
-    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-    private final CustomAccessDeniedHandler customAccessDeniedHandler;
+//    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+//    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
 
     @Bean
@@ -53,7 +50,6 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         return (web) -> web.ignoring()
                 //.requestMatchers(PathRequest.toH2Console())
                 .antMatchers("/swagger-ui/**", "/v3/api-docs/**")
-                .antMatchers("/h2-console/**")
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
@@ -70,19 +66,20 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 //                .antMatchers("/docs").permitAll()
 //                .antMatchers("/api/**").permitAll()
-                .antMatchers("/api/member/signup").permitAll()
-                .antMatchers("/api/member/login").permitAll()
+//                .antMatchers("/api/account/signup").permitAll()
+//                .antMatchers("/api/account/login").permitAll()
                 // 멤버조회
-                .antMatchers("/api/member/**").permitAll()
+//                .antMatchers("/api/account/**").permitAll()
+                .antMatchers("**").permitAll()
                 // 라디오조회
-                .antMatchers(HttpMethod.GET, "/api/audioclip/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/audioAlbum/**").permitAll()
-                .antMatchers("/webSocket").permitAll()
+//                .antMatchers(HttpMethod.GET, "/api/audioclip/**").permitAll()
+//                .antMatchers(HttpMethod.GET, "/api/audioAlbum/**").permitAll()
+//                .antMatchers("/webSocket").permitAll()
                 .anyRequest().authenticated()
                 // JWT 인증/인가를 사용하기 위한 설정
                 .and()
-                .addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)
-                .oauth2Login();
+                .addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);
+//                .oauth2Login();
 //                .logout()//oauth2 관련 내용 추가 (89번째 줄까지)
 //                .logoutSuccessUrl("/")
 //                .and()
@@ -92,8 +89,9 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 //                .userService(customOAuth2MemberService);
 
         //Controller 단 전에 시큐리티에서 검사하므로 따로 Exceptionhandler가 필요하다
-        http.exceptionHandling().authenticationEntryPoint(customAuthenticationEntryPoint);
-        http.exceptionHandling().accessDeniedHandler(customAccessDeniedHandler);
+//        http.exceptionHandling().authenticationEntryPoint(customAuthenticationEntryPoint);
+//        http.exceptionHandling().accessDeniedHandler(customAccessDeniedHandler);
+        http.cors();
         return http.build();
     }
 
@@ -102,7 +100,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         registry
                 .addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
-                .allowedOrigins("https://sogonsogon.live")
+                .allowedOrigins("http://localhost:8080")
                 .allowedOriginPatterns("*") // 허용되는 출처 패턴을 사용하여 와일드카드(*) 지정
                 .allowedMethods("*")
                 .allowedHeaders("*")

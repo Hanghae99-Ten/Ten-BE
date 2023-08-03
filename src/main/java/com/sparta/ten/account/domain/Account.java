@@ -1,4 +1,4 @@
-package com.sparta.ten.member.domain;
+package com.sparta.ten.account.domain;
 
 
 import lombok.*;
@@ -11,7 +11,7 @@ import javax.validation.constraints.Email;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "member")
-public class Member{
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,19 +19,28 @@ public class Member{
 
     @Email// @가 없거나 영문이 아닌 한글인 경우, 특수기호는 오류
     @Column(nullable = false, unique = true)
-    private String email;
+    private String accountUserId;
 
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
-    private String nickname;
+    private String accountName;
+
+    @Column(nullable = false)
+    private boolean isActive;
 
     @Column(nullable = true)
-    private String profileImageUrl;
+    private String accountProfileImage;
 
     @Column(nullable = true)
-    private String memberInfo;
+    private String accountBackgroundImage;
+
+    @Column(nullable = true)
+    private String introduce;
+
+    @Column(nullable = true)
+    private AccountMbtiEnum mbti;
 
     @Column(unique = true)
     private Long kakaoId;
@@ -41,7 +50,8 @@ public class Member{
 
     @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private MemberRole role ;
+    private AccountRoleEnum accountRole;
+
 
 //    public Member(SignUpRequestDto requestDto, String password){
 //        this.membername = requestDto.getMembername();

@@ -1,7 +1,11 @@
 package com.sparta.ten.security;
 
-import com.sparta.ten.member.domain.Member;
+import com.sparta.ten.account.domain.Account;
+import com.sparta.ten.account.domain.AccountRoleEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,21 +13,21 @@ import java.util.Collection;
 @Slf4j
 public class UserDetailsImpl implements UserDetails {
 
-    private final Member user;
+    private final Account account;
     private final String username;
 
-    public UserDetailsImpl(Member user, String username) {
-        this.user = user;
+    public UserDetailsImpl(Account account, String username) {
+        this.account = account;
         this.username = username;
     }
 
-    public Member getUser() {
-        return user;
+    public Account getUser() {
+        return account;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        MemberRole role = user.getRole();
+        AccountRoleEnum role = account.getAccountRole();
         String authority = role.getAuthority();
 
         SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
