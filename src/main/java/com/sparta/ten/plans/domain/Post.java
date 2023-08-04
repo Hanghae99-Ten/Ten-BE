@@ -5,14 +5,35 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "plan")
+@Table(name = "post")
 public class Post extends BaseDomainWithId {
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "content")
+    private String content;
+
+    @Column(name = "location")
+    private String location;
+
+    @Column(name = "start_at")
+    private LocalDateTime startAt;
+
+    @Column(name = "end_at")
+    private LocalDateTime endAt;
+
+    @Column(name = "memo")
+    private String memo;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Plan plan;
 }
