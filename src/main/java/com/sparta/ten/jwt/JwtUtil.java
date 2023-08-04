@@ -1,6 +1,6 @@
 package com.sparta.ten.jwt;
 
-import com.sparta.ten.account.domain.AccountRoleEnum;
+import com.sparta.ten.accounts.domain.AccountRoleEnum;
 import com.sparta.ten.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;

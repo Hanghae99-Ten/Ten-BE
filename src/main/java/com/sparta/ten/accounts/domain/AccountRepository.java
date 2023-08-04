@@ -1,4 +1,4 @@
-package com.sparta.ten.account.domain;
+package com.sparta.ten.accounts.domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
