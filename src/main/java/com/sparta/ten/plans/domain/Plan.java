@@ -33,12 +33,16 @@ public class Plan extends BaseDomainWithId {
     private Boolean isOpen;
 
     @Column(name = "hit")
-    private Long hit;
+    private Boolean isOpen;
 
     @Column(name = "is_share")
     private Boolean isShare;
 
+    @Column(name = "memo")
+    private String memo;
+
     @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+    @OrderBy("createdAt")
     private Set<Post> posts = new LinkedHashSet<>();
 
 
