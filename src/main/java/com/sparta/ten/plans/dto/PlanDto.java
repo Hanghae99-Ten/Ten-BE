@@ -30,4 +30,25 @@ public class PlanDto {
         private String memo;
     }
 
+    @Getter
+    @Setter
+    @ApiOperation("PlanDto.Update")
+    public static class Update{
+
+    }
+
+    @Setter
+    @Getter
+    @ApiOperation("PlanDto.Response")
+    public static class Response extends Simple{
+
+    }
+
+    @Getter
+    @Setter
+    @ApiOperation("PlanDto.Simple")
+    public static class Simple{
+
+    }
+
 }

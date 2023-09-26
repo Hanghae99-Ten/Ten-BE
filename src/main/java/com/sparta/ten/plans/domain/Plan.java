@@ -33,7 +33,7 @@ public class Plan extends BaseDomainWithId {
     private Boolean isOpen;
 
     @Column(name = "hit")
-    private Boolean isOpen;
+    private Integer hit;
 
     @Column(name = "is_share")
     private Boolean isShare;
@@ -41,9 +41,8 @@ public class Plan extends BaseDomainWithId {
     @Column(name = "memo")
     private String memo;
 
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
-    @OrderBy("createdAt")
-    private Set<Post> posts = new LinkedHashSet<>();
-
+    @OneToMany(mappedBy = "plan" , cascade = CascadeType.ALL)
+    @OrderBy("orderIndex asc")
+    private Set<Date> dates = new LinkedHashSet<>();
 
 }

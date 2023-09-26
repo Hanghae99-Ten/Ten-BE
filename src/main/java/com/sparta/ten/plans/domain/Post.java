@@ -31,6 +31,11 @@ public class Post extends BaseDomainWithId {
     @Column(name = "end_at")
     private LocalDateTime endAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Plan plan;
+    @Column(name = "order_index")
+    private Integer orderIndex;
+
+    @ManyToOne
+    @JoinColumn(name = "date_id")
+    private Date date;
+
 }
