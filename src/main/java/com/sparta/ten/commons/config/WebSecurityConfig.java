@@ -1,4 +1,4 @@
-package com.sparta.ten.config;
+package com.sparta.ten.commons.config;
 
 import com.sparta.ten.jwt.JwtAuthFilter;
 import com.sparta.ten.jwt.JwtUtil;

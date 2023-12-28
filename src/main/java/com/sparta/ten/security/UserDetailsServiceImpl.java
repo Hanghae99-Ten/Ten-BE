@@ -1,7 +1,7 @@
 package com.sparta.ten.security;
 
-import com.sparta.ten.account.domain.Account;
-import com.sparta.ten.account.domain.AccountRepository;
+import com.sparta.ten.accounts.domain.Account;
+import com.sparta.ten.accounts.domain.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
