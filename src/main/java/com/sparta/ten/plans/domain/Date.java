@@ -2,6 +2,7 @@ package com.sparta.ten.plans.domain;
 
 import com.sparta.ten.commons.domain.BaseDomain;
 import com.sparta.ten.commons.domain.BaseDomainWithId;
+import com.sparta.ten.commons.dto.DomainWithMapper;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +16,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @Table(name = "date")
-public class Date extends BaseDomainWithId {
+public class Date extends BaseDomainWithId implements DomainWithMapper {
 
     private Integer orderIndex;
 
@@ -26,4 +27,8 @@ public class Date extends BaseDomainWithId {
     @OrderBy("orderIndex asc ")
     private Set<Post> posts = new LinkedHashSet<>();
 
+    @Override
+    public Object toResponse() {
+        return null;
+    }
 }
