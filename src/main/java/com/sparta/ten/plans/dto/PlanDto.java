@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import java.time.LocalDate;
 
 public class PlanDto {
@@ -34,7 +33,7 @@ public class PlanDto {
     @Setter
     @ApiOperation("PlanDto.Update")
     public static class Update{
-
+        private Integer orderIndex;
     }
 
     @Setter
