@@ -1,5 +1,6 @@
 package com.sparta.ten.plans.dto;
 
+import com.sparta.ten.accounts.dto.AccountDto;
 import io.swagger.annotations.ApiOperation;
 import lombok.Getter;
 import lombok.Setter;

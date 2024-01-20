@@ -16,7 +16,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @Table(name = "date")
-public class Date extends BaseDomainWithId implements DomainWithMapper {
+public class  Date extends BaseDomainWithId implements DomainWithMapper {
 
     private Integer orderIndex;
 

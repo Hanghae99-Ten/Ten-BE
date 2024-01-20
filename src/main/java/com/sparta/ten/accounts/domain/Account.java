@@ -10,7 +10,7 @@ import javax.validation.constraints.Email;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "member")
+@Entity(name = "account")
 public class Account {
 
     @Id
@@ -93,5 +93,11 @@ public class Account {
 //    }
 
 
-
+    public Account(String accountUserId, String password, String accountName) {
+        this.accountUserId = accountUserId;
+        this.password = password;
+        this.accountName = accountName;
+        this.isActive = false;
+        this.accountRole = AccountRoleEnum.USER;
+    }
 }
