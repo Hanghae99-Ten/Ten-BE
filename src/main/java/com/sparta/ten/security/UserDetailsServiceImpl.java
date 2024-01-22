@@ -21,8 +21,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         System.out.println("UserDetailsServiceImpl.loadUserByUsername : " + accountName);
 
-        Account user = accountRepository.findByAccountName(accountName)
+        Account user = accountRepository.findByAccountUserId(accountName)
                 .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
-        return new UserDetailsImpl(user, user.getAccountName());
+        return new UserDetailsImpl(user, user.getAccountUserId());
     }
 }

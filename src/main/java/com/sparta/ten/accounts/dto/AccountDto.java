@@ -8,11 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Comment;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
 public class AccountDto {
 
@@ -20,13 +23,16 @@ public class AccountDto {
     @Setter
     @ApiOperation("AccountDto.Signup")
     public static class Signup {
-        @Email
+        @Email(message = "이메일 형식으로 입력해주세요.")
         private String accountUserId;
 
+        @NotBlank(message = "비밀번호를 입력해주세요.")
         private String password;
 
+        @NotBlank(message = "비밀번호 확인을 입력해주세요.")
         private String passwordCheck;
 
+        @NotBlank(message = "닉네임을 입력해주세요.")
         private String accountName;
     }
 
@@ -34,8 +40,11 @@ public class AccountDto {
     @Setter
     @ApiOperation("AccountDto.LoginRequest")
     public static class LoginRequest {
+
+        @Email(message = "이메일 형식으로 입력해주세요.")
         private String accountUserId;
 
+        @NotBlank(message = "비밀번호를 입력해주세요.")
         private String password;
 
     }
@@ -44,24 +53,29 @@ public class AccountDto {
     @Setter
     @ApiOperation("AccountDto.LoginResponse")
     public static class LoginResponse {
+
+        @Comment("[DB] id")
         private Long id;
 
+        @Comment("[이메일] id")
         private String accountUserId;
 
+        @Comment("로그인 여부")
         private boolean isActive;
 
+        @Comment("프로필 이미지")
         private String accountProfileImage;
 
+        @Comment("프로필 배경 이미지")
         private String accountBackgroundImage;
 
+        @Comment("자기소개")
         private String introduce;
 
+        @Comment("mbti")
         private AccountMbtiEnum mbti;
 
-        private Long kakaoId;
-
-        private String naverId;
-
+        @Comment("일반/관리자")
         private AccountRoleEnum accountRole;
 
         public LoginResponse(Account account) {
@@ -72,8 +86,6 @@ public class AccountDto {
             this.accountBackgroundImage = account.getAccountBackgroundImage();
             this.introduce = account.getIntroduce();
             this.mbti = account.getMbti();
-            this.kakaoId = account.getKakaoId();
-            this.naverId = account.getNaverId();
             this.accountRole = account.getAccountRole();
         }
     }
@@ -82,26 +94,34 @@ public class AccountDto {
     @Setter
     @ApiOperation("AccountDto.Simple")
     public static class Simple {
+        @Comment("[DB] id")
         private Long id;
 
+        @Comment("[이메일] id")
         private String accountUserId;
 
-        private String accountName;
-
+        @Comment("로그인 여부")
         private boolean isActive;
 
+        @Comment("프로필 이미지")
         private String accountProfileImage;
 
+        @Comment("프로필 배경 이미지")
         private String accountBackgroundImage;
 
+        @Comment("자기소개")
         private String introduce;
 
+        @Comment("mbti")
         private AccountMbtiEnum mbti;
 
+        @Comment("[카카오] id")
         private Long kakaoId;
 
+        @Comment("[네이버] id")
         private String naverId;
 
+        @Comment("일반/관리자")
         private AccountRoleEnum accountRole;
 
     }

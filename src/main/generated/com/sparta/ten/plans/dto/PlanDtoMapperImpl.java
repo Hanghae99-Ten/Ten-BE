@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-20T21:55:37+0900",
+    date = "2024-01-22T20:17:09+0900",
     comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.1.jar, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 @Component
@@ -88,7 +88,6 @@ public class PlanDtoMapperImpl implements PlanDtoMapper {
 
         simple.setId( account.getId() );
         simple.setAccountUserId( account.getAccountUserId() );
-        simple.setAccountName( account.getAccountName() );
         simple.setActive( account.isActive() );
         simple.setAccountProfileImage( account.getAccountProfileImage() );
         simple.setAccountBackgroundImage( account.getAccountBackgroundImage() );

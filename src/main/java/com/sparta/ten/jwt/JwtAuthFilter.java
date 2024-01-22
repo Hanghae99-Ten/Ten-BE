@@ -1,18 +1,23 @@
 package com.sparta.ten.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sparta.ten.accounts.domain.TokenState;
 import com.sparta.ten.security.SecurityExceptionDto;
+import com.sparta.ten.util.StatusResponseDto;
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -26,21 +31,44 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        String token = jwtUtil.resolveToken(request);
+        Cookie[] cookies = request.getCookies();
+        String accessToken = null;
+        String refreshToken = null;
 
-        if(token != null) {
-            if(!jwtUtil.validateToken(token)){
-                jwtExceptionHandler(response, "Token Error", HttpStatus.UNAUTHORIZED.value());
-                return;
+        if(cookies != null) {
+            for(Cookie cookie : cookies) {
+                if(cookie == null) {
+                    continue;
+                }
+                if(cookie.getName().equals(JwtUtil.AUTHORIZATION_HEADER)) {
+                    accessToken = jwtUtil.resolveToken(cookie);
+                } else if(cookie.getName().equals(JwtUtil.REFRESH_HEADER)) {
+                    refreshToken = jwtUtil.resolveToken(cookie);
+                }
             }
-            //토큰을 디코딩해서 받아옴
-            Claims info = jwtUtil.getUserInfoFromToken(token);
-            setAuthentication(info.getSubject()); // username 받아오기
-        } else {
-            SecurityContextHolder.clearContext();
         }
 
-        filterChain.doFilter(request,response);
+        if(accessToken != null) {
+            if (jwtUtil.validateToken(accessToken) == TokenState.VALID) {
+                setAuthentication(jwtUtil.getUserInfoFromToken(accessToken).getSubject());
+            } else if (jwtUtil.validateToken(accessToken) == TokenState.EXPIRED) {
+                ResponseCookie responseCookie = ResponseCookie.from(JwtUtil.AUTHORIZATION_HEADER, null)
+                        .path("/")
+                        .httpOnly(true)
+                        .sameSite("None")
+                        .secure(true)
+                        .maxAge(1)
+                        .build();
+                response.addHeader("Set-Cookie", responseCookie.toString());
+                jwtExceptionHandler(response, "NEED REISSUE", HttpStatus.SEE_OTHER);
+                return;
+            }
+        } else if (refreshToken != null) {
+            if (jwtUtil.validateRefreshToken(refreshToken)) {
+                setAuthentication(jwtUtil.getUserInfoFromToken(refreshToken).getSubject());
+            }
+        }
+        filterChain.doFilter(request, response);
     }
 
     //Authentication -> context -> SecurityContextHolder
@@ -51,11 +79,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
         SecurityContextHolder.setContext(context);
     }
-    public void jwtExceptionHandler(HttpServletResponse response, String msg, int statusCode) {
-        response.setStatus(statusCode);
+    public void jwtExceptionHandler(HttpServletResponse response, String msg, HttpStatus httpStatus) {
+        response.setStatus(httpStatus.value());
         response.setContentType("application/json");
         try {
-            String json = new ObjectMapper().writeValueAsString(new SecurityExceptionDto(statusCode, msg));
+            String json = new ObjectMapper().writeValueAsString(new StatusResponseDto<>(httpStatus.value(), msg));
             response.getWriter().write(json);
         } catch (Exception e) {
             log.error(e.getMessage());
