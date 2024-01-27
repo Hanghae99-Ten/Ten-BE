@@ -3,11 +3,9 @@ package com.sparta.ten.commons.config;
 import com.sparta.ten.jwt.JwtAuthFilter;
 import com.sparta.ten.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,7 +28,7 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
-@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET) //붐비 붐비에 추가 되어 있는 내용
+//@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET) //붐비 붐비에 추가 되어 있는 내용
 public class WebSecurityConfig implements WebMvcConfigurer {
 
     private final JwtUtil jwtUtil;
@@ -60,6 +58,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
         //로그인 된 후 토큰없이 자동 인증되는 것을 방지
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
 
         //회원가입, 로그인,조회까지는 security 인증 없이도 가능함
         http.authorizeRequests()
