@@ -34,7 +34,7 @@ public class QPlan extends EntityPathBase<Plan> {
 
     public final DatePath<java.time.LocalDate> endedDate = createDate("endedDate", java.time.LocalDate.class);
 
-    public final NumberPath<Integer> hit = createNumber("hit", Integer.class);
+    public final NumberPath<Long> hit = createNumber("hit", Long.class);
 
     //inherited
     public final NumberPath<Long> id;

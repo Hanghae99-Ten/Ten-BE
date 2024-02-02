@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-01-22T20:17:09+0900",
-    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.1.jar, environment: Java 17.0.10 (Amazon.com Inc.)"
+    date = "2024-02-02T22:20:31+0900",
+    comments = "version: 1.5.3.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.1.jar, environment: Java 17.0.6 (Azul Systems, Inc.)"
 )
 @Component
 public class PlanDtoMapperImpl implements PlanDtoMapper {
@@ -27,9 +27,7 @@ public class PlanDtoMapperImpl implements PlanDtoMapper {
         plan.setEndedDate( dto.getEndedDate() );
         plan.setLocation( dto.getLocation() );
         plan.setIsOpen( dto.getIsOpen() );
-        if ( dto.getHit() != null ) {
-            plan.setHit( dto.getHit().intValue() );
-        }
+        plan.setHit( dto.getHit() );
         plan.setIsShare( dto.getIsShare() );
         plan.setMemo( dto.getMemo() );
 
@@ -69,12 +67,7 @@ public class PlanDtoMapperImpl implements PlanDtoMapper {
         entity.setEndedDate( dto.getEndedDate() );
         entity.setLocation( dto.getLocation() );
         entity.setIsOpen( dto.getIsOpen() );
-        if ( dto.getHit() != null ) {
-            entity.setHit( dto.getHit().intValue() );
-        }
-        else {
-            entity.setHit( null );
-        }
+        entity.setHit( dto.getHit() );
         entity.setIsShare( dto.getIsShare() );
         entity.setMemo( dto.getMemo() );
     }

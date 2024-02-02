@@ -4,7 +4,7 @@ import com.sparta.ten.accounts.dto.AccountDto;
 import io.swagger.annotations.ApiOperation;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Comment;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Column;
 import java.time.LocalDate;
@@ -15,20 +15,29 @@ public class PlanDto {
     @Setter
     @ApiOperation("PlanDto.Create")
     public static class Create{
+
+        @ApiModelProperty("제목")
         private String title;
 
+        @ApiModelProperty("시작일")
         private LocalDate startedDate;
 
+        @ApiModelProperty("종료일")
         private LocalDate endedDate;
 
+        @ApiModelProperty("위치")
         private String location;
 
+        @ApiModelProperty("노출 여부")
         private Boolean isOpen;
 
+        @ApiModelProperty("조회수")
         private Long hit;
 
+        @ApiModelProperty("공유 여부")
         private Boolean isShare;
 
+        @ApiModelProperty("메모")
         private String memo;
     }
 
@@ -44,16 +53,16 @@ public class PlanDto {
     @ApiOperation("PlanDto.Response")
     public static class Response extends Simple{
 
-        @Comment("노출 여부")
+        @ApiModelProperty("노출 여부")
         private Boolean isOpen;
 
-        @Comment("조회수")
-        private Integer hit;
+        @ApiModelProperty("조회수")
+        private Long hit;
 
-        @Comment("공유 여부")
+        @ApiModelProperty("공유 여부")
         private Boolean isShare;
 
-        @Comment("메모")
+        @ApiModelProperty("메모")
         private String memo;
 
     }
@@ -63,22 +72,22 @@ public class PlanDto {
     @ApiOperation("PlanDto.Simple")
     public static class Simple{
 
-        @Comment("고유 아이디")
+        @ApiModelProperty("고유 아이디")
         private Long id;
 
-        @Comment("작성자")
+        @ApiModelProperty("작성자")
         private AccountDto.Simple account;
 
-        @Comment("제목")
+        @ApiModelProperty("제목")
         private String title;
 
-        @Comment("시작일")
+        @ApiModelProperty("시작일")
         private LocalDate startedDate;
 
-        @Comment("종료일")
+        @ApiModelProperty("종료일")
         private LocalDate endedDate;
 
-        @Comment("위치")
+        @ApiModelProperty("위치")
         private String location;
 
 

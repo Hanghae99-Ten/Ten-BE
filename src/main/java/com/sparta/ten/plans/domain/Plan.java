@@ -40,7 +40,7 @@ public class Plan extends BaseDomainWithId {
 
     @Column(name = "hit")
     @Comment("조회수")
-    private Integer hit;
+    private Long hit;
 
     @Column(name = "is_share")
     @Comment("공유 여부")
