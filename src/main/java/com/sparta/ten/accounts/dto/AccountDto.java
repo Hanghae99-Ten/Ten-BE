@@ -4,18 +4,13 @@ import com.sparta.ten.accounts.domain.Account;
 import com.sparta.ten.accounts.domain.AccountMbtiEnum;
 import com.sparta.ten.accounts.domain.AccountRoleEnum;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Comment;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 public class AccountDto {
 
@@ -27,6 +22,8 @@ public class AccountDto {
         private String accountUserId;
 
         @NotBlank(message = "비밀번호를 입력해주세요.")
+        @Pattern(regexp = "(?=.*?[A-Z])(?=.*?[\\d])(?=.*?[~!@#$%^&*()_+=\\-`]).{8,15}",
+                message = "비밀번호는 영문 대문자, 특수기호, 숫자가 적어도 1개 이상씩 포함된 조합이어야 합니다.")
         private String password;
 
         @NotBlank(message = "비밀번호 확인을 입력해주세요.")
