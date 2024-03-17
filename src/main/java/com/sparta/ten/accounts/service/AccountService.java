@@ -167,7 +167,7 @@ public class AccountService {
     // 액세스 토큰 재발급.
     @Transactional(readOnly = true)
     public StatusResponseDto<String> reIssueAccessToken(Account account, HttpServletResponse httpServletResponse) throws UnsupportedEncodingException {
-        // Redis 서버에서 RefreshToken 점검.
+        // TODO: Redis 서버에서 RefreshToken 점검.
         RefreshToken refreshToken = refreshTokenRepository.findByAccountUserId(account.getAccountUserId()).orElseThrow(
                 () -> new CustomException(ErrorMsg.NOT_FOUND_REFRESH_TOKEN));
 
