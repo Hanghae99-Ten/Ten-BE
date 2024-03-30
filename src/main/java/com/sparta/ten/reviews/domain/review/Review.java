@@ -30,11 +30,11 @@ public class Review extends BaseDomainWithId {
     @Comment("내용")
     private String content;
 
-    @Column(name = "content", nullable = false)
+    @Column(name = "isOpen", nullable = false)
     @Comment("노출 여부")
     private boolean isOpen;
 
-    @Column(name = "content", nullable = false)
+    @Column(name = "score", nullable = false)
     @Comment("별점")
     private float score;
 
