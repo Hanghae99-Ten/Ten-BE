@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "post")
+@Table(name = "image")
 public class Image extends BaseDomainWithId {
 
     @Column(name = "image")
