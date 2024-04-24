@@ -1,16 +1,20 @@
 package com.sparta.ten.entity;
 
+
 import lombok.Getter;
 import lombok.Setter;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class Hello {
 
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private Long id;
 }
