@@ -18,24 +18,36 @@ public class QAccountGroupConnect extends EntityPathBase<AccountGroupConnect> {
 
     private static final long serialVersionUID = -1629486849L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QAccountGroupConnect accountGroupConnect = new QAccountGroupConnect("accountGroupConnect");
 
-    public final SetPath<Account, QAccount> accounts = this.<Account, QAccount>createSet("accounts", Account.class, QAccount.class, PathInits.DIRECT2);
+    public final QAccount account;
 
-    public final SetPath<Group, QGroup> groups = this.<Group, QGroup>createSet("groups", Group.class, QGroup.class, PathInits.DIRECT2);
+    public final QGroup group;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public QAccountGroupConnect(String variable) {
-        super(AccountGroupConnect.class, forVariable(variable));
+        this(AccountGroupConnect.class, forVariable(variable), INITS);
     }
 
     public QAccountGroupConnect(Path<? extends AccountGroupConnect> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QAccountGroupConnect(PathMetadata metadata) {
-        super(AccountGroupConnect.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QAccountGroupConnect(PathMetadata metadata, PathInits inits) {
+        this(AccountGroupConnect.class, metadata, inits);
+    }
+
+    public QAccountGroupConnect(Class<? extends AccountGroupConnect> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.account = inits.isInitialized("account") ? new QAccount(forProperty("account")) : null;
+        this.group = inits.isInitialized("group") ? new QGroup(forProperty("group")) : null;
     }
 
 }

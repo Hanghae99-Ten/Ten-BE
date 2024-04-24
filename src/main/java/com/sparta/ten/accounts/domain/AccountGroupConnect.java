@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Getter
-@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "accountGroupConnect")
@@ -19,9 +18,11 @@ public class AccountGroupConnect {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Account> accounts = new HashSet<>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
+    private Account account;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Group> groups = new HashSet<>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "group_id")
+    private Group group;
 }
