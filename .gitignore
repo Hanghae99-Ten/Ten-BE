@@ -90,6 +90,7 @@ fabric.properties
 # modules.xml
 # .idea/misc.xml
 # *.ipr
+.idea/**
 .idea/compiler.xml
 .idea/modules/
 # Sonarlint plugin
@@ -178,3 +179,5 @@ data/
 
 #yml
 application.yml
+
+src/main/generated
