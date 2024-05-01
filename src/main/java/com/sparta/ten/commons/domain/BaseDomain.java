@@ -27,10 +27,4 @@ public abstract class BaseDomain implements Serializable {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    @CreatedBy
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_by_id")
-    @Comment("작성자")
-    private Account account;
-
 }

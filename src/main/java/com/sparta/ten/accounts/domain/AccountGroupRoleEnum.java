@@ -3,6 +3,6 @@ package com.sparta.ten.accounts.domain;
 import lombok.Getter;
 
 @Getter
-public enum GroupTypeEnum {
-    TEAM, INDIVIDUAL
+public enum AccountGroupRoleEnum {
+    CREATOR, MEMBER
 }

@@ -39,9 +39,6 @@ public class Account {
     @Column(nullable = true)
     private String introduce;
 
-    @Column(nullable = true)
-    private AccountMbtiEnum mbti;
-
     @Column(unique = true)
     private Long kakaoId;
 
