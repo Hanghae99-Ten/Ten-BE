@@ -1,6 +1,7 @@
 package com.sparta.ten.plans.domain;
 
 import com.sparta.ten.commons.domain.BaseDomainWithId;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,6 @@ import java.time.LocalDateTime;
 
 
 @Getter
-@Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "post")
@@ -46,4 +46,19 @@ public class Post extends BaseDomainWithId {
     @Comment("일자 외래키")
     private Date date;
 
+    @Column(name = "memo")
+    @Comment("메모")
+    private String memo;
+
+    @Builder
+    public Post(String title, String content, String location, LocalDateTime startAt, LocalDateTime endAt, Integer orderIndex, Date date, String memo) {
+        this.title = title;
+        this.content = content;
+        this.location = location;
+        this.startAt = startAt;
+        this.endAt = endAt;
+        this.orderIndex = orderIndex;
+        this.date = date;
+        this.memo = memo;
+    }
 }

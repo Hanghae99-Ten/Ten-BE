@@ -12,20 +12,19 @@ import org.springframework.http.ResponseEntity;
 
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class StatusResponseDto<T> {
     private int statusCode;
 
+//    @JsonInclude(JsonInclude.Include.NON_NULL)
+//    private String message;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
 
-    public StatusResponseDto(int statusCode, T data) {
-        this.statusCode = statusCode;
-        this.data = data;
-    }
-
     public static <T> StatusResponseDto<T> success(T data) {
-        return new StatusResponseDto<>(200, data);
+        return new StatusResponseDto<>(200,data);
     }
 
     @Getter

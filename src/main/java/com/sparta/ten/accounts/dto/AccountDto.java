@@ -1,7 +1,6 @@
 package com.sparta.ten.accounts.dto;
 
 import com.sparta.ten.accounts.domain.Account;
-import com.sparta.ten.accounts.domain.AccountMbtiEnum;
 import com.sparta.ten.accounts.domain.AccountRoleEnum;
 import io.swagger.annotations.ApiOperation;
 import lombok.Getter;
@@ -69,9 +68,6 @@ public class AccountDto {
         @Comment("자기소개")
         private String introduce;
 
-        @Comment("mbti")
-        private AccountMbtiEnum mbti;
-
         @Comment("일반/관리자")
         private AccountRoleEnum accountRole;
 
@@ -82,7 +78,6 @@ public class AccountDto {
             this.accountProfileImage = account.getAccountProfileImage();
             this.accountBackgroundImage = account.getAccountBackgroundImage();
             this.introduce = account.getIntroduce();
-            this.mbti = account.getMbti();
             this.accountRole = account.getAccountRole();
         }
     }
@@ -108,9 +103,6 @@ public class AccountDto {
 
         @Comment("자기소개")
         private String introduce;
-
-        @Comment("mbti")
-        private AccountMbtiEnum mbti;
 
         @Comment("[카카오] id")
         private Long kakaoId;

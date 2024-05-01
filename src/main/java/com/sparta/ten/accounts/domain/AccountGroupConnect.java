@@ -1,13 +1,11 @@
 package com.sparta.ten.accounts.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Getter
 @Entity
@@ -25,4 +23,20 @@ public class AccountGroupConnect {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id")
     private Group group;
+
+    @Column(nullable = false)
+    private Boolean isInvited;
+
+    @Column(nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private AccountGroupRoleEnum accountGroupRoleEnum;
+
+    @Builder
+    public AccountGroupConnect(Long id, Account account, Group group, Boolean isInvited, AccountGroupRoleEnum accountGroupRoleEnum) {
+        this.id = id;
+        this.account = account;
+        this.group = group;
+        this.isInvited = isInvited;
+        this.accountGroupRoleEnum = accountGroupRoleEnum;
+    }
 }
