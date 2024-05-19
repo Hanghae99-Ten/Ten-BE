@@ -1,6 +1,6 @@
 package com.sparta.ten.commons.dto;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,16 +18,16 @@ public class PageableDto {
     @Setter
     public static class Request {
 
-        @ApiModelProperty(value = "페이지", example = "0", required = false, position = 1)
+        @Schema(description = "페이지 번호", example = "0", required = false)
         private int page = 0;
 
-        @ApiModelProperty(value = "페이지 당 수", example = "20", required = false, position = 2)
+        @Schema(description = "페이지 당 수", example = "20", required = false)
         private int limit = 20;
 
-        @ApiModelProperty(value = "정렬필드", example = "createdAt", required = false, position = 3)
+        @Schema(description = "정렬필드", example = "createdAt", required = false)
         private String sort = "createdAt";
 
-        @ApiModelProperty(value = "정렬필드", example = "desc", required = false, position = 3)
+        @Schema(description = "정렬필드", example = "desc", required = false)
         private String dir = "desc";
 
         public Sort toSort() {
@@ -50,13 +50,13 @@ public class PageableDto {
             this.size = content.getSize();
         }
 
-        @ApiModelProperty(value = "총갯수")
+        @Schema(description = "총갯수")
         private Long totalElements;
 
-        @ApiModelProperty(value = "페이지당 개수")
+        @Schema(description = "페이지당 개수")
         private Integer size;
 
-        @ApiModelProperty(value = "페이지 번호")
+        @Schema(description = "페이지 번호")
         private Integer number;
 
         private List<T> content;
