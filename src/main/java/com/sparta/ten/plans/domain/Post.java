@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Entity
 @NoArgsConstructor
 @Table(name = "post")
+@Setter
 public class Post extends BaseDomainWithId {
 
     @Column(name = "title")

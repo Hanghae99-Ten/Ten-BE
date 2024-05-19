@@ -24,7 +24,7 @@ public class Date extends BaseDomainWithId {
     @ManyToOne(fetch = FetchType.LAZY)
     private Plan plan;
 
-    @OneToMany(mappedBy = "date", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "date", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @OrderBy("orderIndex asc ")
     private Set<Post> posts = new LinkedHashSet<>();
 
