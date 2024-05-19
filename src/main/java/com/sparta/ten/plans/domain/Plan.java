@@ -29,6 +29,7 @@ public class Plan {
     @Enumerated(value = EnumType.STRING)
     private PlanMbtiEnum mbti;
 
+
     @Builder
     public Plan(Group group, PlanMbtiEnum mbti) {
         this.group = group;

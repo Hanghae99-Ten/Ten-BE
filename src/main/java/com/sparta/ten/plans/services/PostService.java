@@ -1,12 +1,17 @@
 package com.sparta.ten.plans.services;
 
+import com.sparta.ten.plans.domain.Date;
 import com.sparta.ten.plans.domain.Post;
 import com.sparta.ten.plans.dto.PostDto;
 import com.sparta.ten.plans.dto.PostDto.ResponsePostDto;
+import com.sparta.ten.plans.repository.DateRepository;
 import com.sparta.ten.plans.repository.PostRepository;
+import com.sparta.ten.plans.repository.PostRespository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 
 @Service
@@ -14,7 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class PostService {
 
-    private final PostRepository postRepository;
+    private final PostRespository postRepository;
+    private final DateRepository dateRepository;
 
 
     public ResponsePostDto getPostList() {
@@ -22,21 +28,26 @@ public class PostService {
     }
 
     public ResponsePostDto getPostDetail(Long id) {
-        Post post = postRepository.findPostById(id);
+        Optional<Post> post = postRepository.findById(id);
+        if (post.get() == null) {
+            return null;
+        }else {
+            Post postValue = post.get();
+            ResponsePostDto responsePostDto = new ResponsePostDto();
+            responsePostDto.setId(postValue.getId());
+            responsePostDto.setCreatedAt(postValue.getCreatedAt());
+            responsePostDto.setUpdatedAt(postValue.getUpdatedAt());
+            responsePostDto.setTitle(postValue.getTitle());
+            responsePostDto.setContent(postValue.getContent());
+            responsePostDto.setLocation(postValue.getLocation());
+            responsePostDto.setStartAt(postValue.getStartAt());
+            responsePostDto.setEndAt(postValue.getEndAt());
+            responsePostDto.setOrderIndex(postValue.getOrderIndex());
+            responsePostDto.setDate(postValue.getDate());
+            responsePostDto.setMemo(postValue.getMemo());
+            return responsePostDto;
+        }
 
-        ResponsePostDto responsePostDto = new ResponsePostDto();
-        responsePostDto.setId(post.getId());
-        responsePostDto.setCreatedAt(post.getCreatedAt());
-        responsePostDto.setUpdatedAt(post.getUpdatedAt());
-        responsePostDto.setTitle(post.getTitle());
-        responsePostDto.setContent(post.getContent());
-        responsePostDto.setLocation(post.getLocation());
-        responsePostDto.setStartAt(post.getStartAt());
-        responsePostDto.setEndAt(post.getEndAt());
-        responsePostDto.setOrderIndex(post.getOrderIndex());
-        responsePostDto.setDate(post.getDate());
-        responsePostDto.setMemo(post.getMemo());
-        return responsePostDto;
     }
 
     @Transactional
@@ -86,8 +97,14 @@ public class PostService {
     }
 
     @Transactional
-    public ResponsePostDto createSimple() {
+    public ResponsePostDto createSimple(Long id) {
+        Date date = dateRepository.findDateById(id);
         Post post = new Post();
+        if (date == null) {
+            throw new IllegalArgumentException();
+        }else{
+            post.setDate(date);
+        }
         postRepository.save(post);
 
         ResponsePostDto responsePostDto = new ResponsePostDto();

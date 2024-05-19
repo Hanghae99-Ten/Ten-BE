@@ -16,6 +16,9 @@ public class PostDto {
     @Getter
     @Setter
     public static class CreatePostDto{
+        @ApiModelProperty(name = "date_id")
+        private Long dateId;
+
         @ApiModelProperty(name = "title")
         private String title;
 

@@ -27,4 +27,12 @@ public class PlanController {
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return ResponseEntity.ok(planService.planPorJCreateRequest(planPorJCreateRequest, userDetails));
     }
+
+//    @Operation(summary = "plan data insert", description = "[plan data insert] api")
+//    @PostMapping("/data")
+//    public ResponseEntity<StatusResponseDto<?>> createPlanPorJ(
+//            @RequestBody PlanPorJCreateRequest planPorJCreateRequest,
+//            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+//
+//    }
 }

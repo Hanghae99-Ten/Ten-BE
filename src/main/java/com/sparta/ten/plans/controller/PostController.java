@@ -33,8 +33,8 @@ public class PostController {
     @ApiOperation(value = "게시물 등록", notes = "게시물 등록")
     @PostMapping("/simple")
     @ApiResponse(code = 200, message = "게시물 등록 성공", response = PostDto.ResponsePostDto.class)
-    public PostDto.ResponsePostDto createSimple() {
-        return postService.createSimple();
+    public PostDto.ResponsePostDto createSimple(@RequestBody Long dateId) {
+        return postService.createSimple(dateId);
     }
 
     @ApiOperation(value = "게시물 등록", notes = "게시물 등록")
