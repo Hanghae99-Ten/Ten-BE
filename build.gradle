@@ -61,8 +61,6 @@ dependencies {
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api" // java.lang.NoClassDefFoundError (javax.annotation.Entity) 대응 코드
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
-	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
 
 	implementation 'org.springdoc:springdoc-openapi-ui:1.6.15'
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'

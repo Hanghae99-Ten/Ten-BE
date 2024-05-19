@@ -2,7 +2,6 @@ package com.sparta.ten.accounts.dto;
 
 import com.sparta.ten.accounts.domain.Account;
 import com.sparta.ten.accounts.domain.AccountRoleEnum;
-import io.swagger.annotations.ApiOperation;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Comment;
@@ -15,7 +14,6 @@ public class AccountDto {
 
     @Getter
     @Setter
-    @ApiOperation("AccountDto.Signup")
     public static class Signup {
         @Email(message = "이메일 형식으로 입력해주세요.")
         private String accountUserId;
@@ -34,7 +32,6 @@ public class AccountDto {
 
     @Getter
     @Setter
-    @ApiOperation("AccountDto.LoginRequest")
     public static class LoginRequest {
 
         @Email(message = "이메일 형식으로 입력해주세요.")
@@ -47,7 +44,6 @@ public class AccountDto {
 
     @Getter
     @Setter
-    @ApiOperation("AccountDto.LoginResponse")
     public static class LoginResponse {
 
         @Comment("[DB] id")
@@ -84,7 +80,6 @@ public class AccountDto {
 
     @Getter
     @Setter
-    @ApiOperation("AccountDto.Simple")
     public static class Simple {
         @Comment("[DB] id")
         private Long id;
