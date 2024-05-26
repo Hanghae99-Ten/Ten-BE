@@ -100,6 +100,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .addMapping("/**")
                 .allowedOrigins("http://localhost:3000")
                 .allowedOrigins("http://localhost:8080")
+                .allowedOrigins("http://15.164.44.185")
                 .allowedOriginPatterns("*") // 허용되는 출처 패턴을 사용하여 와일드카드(*) 지정
                 .allowedMethods("*")
                 .allowedHeaders("*")

@@ -81,17 +81,18 @@ public class AccountService {
             throw new CustomException(ErrorMsg.NOT_MATCH_PASSWORD);
         }
 
-        getAccessToken(account, response);
-        getRefreshToken(account, response);
+        String accessToken = getAccessToken(account, response);
+        String refreshToken = getRefreshToken(account, response);
+
 
 //        response.addHeader(JwtUtil.AUTHORIZATION_HEADER, jwtUtil.createToken(account.getAccountUserId(), AccountRoleEnum.USER));
 
-        return StatusResponseDto.success(new AccountDto.LoginResponse(account));
+        return StatusResponseDto.success(new AccountDto.LoginResponse(account, accessToken, refreshToken));
 
 
     }
 
-    private void getRefreshToken(Account account, HttpServletResponse response) throws UnsupportedEncodingException {
+    private String getRefreshToken(Account account, HttpServletResponse response) throws UnsupportedEncodingException {
         String createRefreshToken = jwtUtil.createToken(account.getAccountUserId(), account.getAccountRole(), TokenType.REFRESH);
         ResponseCookie cookie = ResponseCookie.from(
                 JwtUtil.REFRESH_HEADER, URLEncoder.encode(createRefreshToken, "UTF-8"))
@@ -113,9 +114,11 @@ public class AccountService {
             RefreshToken newRefreshToken = new RefreshToken(createRefreshToken, account.getAccountUserId());
             refreshTokenRepository.save(newRefreshToken);
         }
+
+        return createRefreshToken;
     }
 
-    private void getAccessToken(Account account, HttpServletResponse response) throws UnsupportedEncodingException {
+    private String getAccessToken(Account account, HttpServletResponse response) throws UnsupportedEncodingException {
         String createdAccessToken = jwtUtil.createToken(account.getAccountUserId(), account.getAccountRole(), TokenType.ACCESS);
 
         log.info("token : " + createdAccessToken);
@@ -130,6 +133,8 @@ public class AccountService {
                 .maxAge(JwtUtil.ACCESS_TOKEN_TIME)
                 .build();
         response.addHeader("Set-Cookie", cookie.toString());
+
+        return createdAccessToken;
     }
 
     //TODO: 현재는 사용하지 않는 로직이지만 추후 Redis 적용 시 필요
