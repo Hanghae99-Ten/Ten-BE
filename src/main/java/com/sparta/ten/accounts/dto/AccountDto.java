@@ -67,7 +67,13 @@ public class AccountDto {
         @Comment("일반/관리자")
         private AccountRoleEnum accountRole;
 
-        public LoginResponse(Account account) {
+        @Comment("AccessToken")
+        private String accessToken;
+
+        @Comment("RefreshToken")
+        private String refreshToken;
+
+        public LoginResponse(Account account, String accessToken, String refreshToken) {
             this.id = account.getId();
             this.accountUserId = account.getAccountUserId();
             this.isActive = account.isActive();
@@ -75,6 +81,8 @@ public class AccountDto {
             this.accountBackgroundImage = account.getAccountBackgroundImage();
             this.introduce = account.getIntroduce();
             this.accountRole = account.getAccountRole();
+            this.accessToken = accessToken;
+            this.refreshToken = refreshToken;
         }
     }
 
